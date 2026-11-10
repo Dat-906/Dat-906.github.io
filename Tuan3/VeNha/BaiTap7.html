@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài tập 7 - Bố cục trang</title>
+  <style>
+    body {
+      margin: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18px;
+    }
+    #wrapper {
+      width: 400px;
+      padding: 10px;
+      border: 1px solid #999;
+      box-shadow: 8px 8px 12px #aaa;
+      background-color: white;
+    }
+    header, nav, main, footer {
+      box-sizing: border-box;
+      border: 2px solid #333;
+      padding: 4px 8px;
+    }
+    header { height: 40px; margin-bottom: 8px; }
+    nav {
+      float: left;
+      width: 20%;
+      height: 200px;
+    }
+    main {
+      margin-left: calc(20% + 8px);   /* chừa chỗ cho nav đang float bên trái */
+      height: 200px;
+    }
+    footer {
+      clear: both;      /* xuống dưới cả nav và main */
+      height: 30px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <header>header</header>
+    <nav>nav</nav>
+    <main>main</main>
+    <footer>footer</footer>
+  </div>
+</body>
+</html>
