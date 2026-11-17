@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>Lab 8</title>
+   <link rel="stylesheet" type="text/css" href="../css/lab08.css" />
+   <link rel="stylesheet" type="text/css" href="../../css/back.css" />
+   <script type="text/javascript" language="javascript" src="js/exercise09.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>More Function Fun</h1>
+</header>
+
+<table class="cart">
+   <tr class="normal">
+      <th>Price</th>
+      <td>$15.00</td>
+   </tr>
+   <tr class="normal">
+      <th>Quantity</th>
+      <td>2</td>
+   </tr>
+   <tr class="normal">
+      <th>Tax</th>
+      <td>$1.50</td>
+   </tr>
+   <tr class="total">
+      <th>Total</th>
+      <td>
+      <script>
+         var amount = calculateTotal(15,2);
+         document.write("$" + amount.toFixed(2));
+      </script>
+      </td>
+   </tr>
+</table>
+
+<h3>Các cách viết hàm ở bước 3-6 (kết quả giống nhau)</h3>
+<table class="cart">
+   <tr class="normal"><th style="width:22em">Cách viết</th><th>Total</th></tr>
+   <script>
+      document.write("<tr class='normal'><td>Bước 1-2: taxRate() riêng</td><td>$" + totalStep2(15,2).toFixed(2) + "</td></tr>");
+      document.write("<tr class='normal'><td>Bước 3: taxRate() lồng trong hàm</td><td>$" + totalStep3(15,2).toFixed(2) + "</td></tr>");
+      document.write("<tr class='normal'><td>Bước 4: hàm có tên gán vào biến</td><td>$" + totalStep4(15,2).toFixed(2) + "</td></tr>");
+      document.write("<tr class='normal'><td>Bước 5: hàm ẩn danh</td><td>$" + totalStep5(15,2).toFixed(2) + "</td></tr>");
+      document.write("<tr class='total'><td>Bước 6: truyền hàm làm tham số</td><td>$" + calculateTotal(15,2).toFixed(2) + "</td></tr>");
+   </script>
+</table>
+
+
+<a class="back" href="../">&larr; Lab 08</a>
+</body>
+</html>

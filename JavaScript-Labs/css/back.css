@@ -1,0 +1,15 @@
+/* Liên kết nhỏ góc trái dưới để quay về danh sách bài, không chiếm chỗ trong bố cục */
+a.back {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  z-index: 9999;
+  font: 13px/1.2 Arial, Helvetica, sans-serif;
+  color: #0b4f9c;
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid #b8c4d6;
+  border-radius: 4px;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+a.back:hover { background: #fff; text-decoration: underline; }

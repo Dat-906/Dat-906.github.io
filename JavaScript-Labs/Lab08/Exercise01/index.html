@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>Exercise 8.1 - Enabling/Disabling JavaScript</title>
+   <link rel="stylesheet" type="text/css" href="../css/lab08.css" />
+   <link rel="stylesheet" type="text/css" href="../../css/back.css" />
+</head>
+<body>
+
+<header>
+  <h1>Exercise 8.1 &ndash; Enabling/Disabling JavaScript</h1>
+</header>
+
+<!-- Mặc định ghi "disabled". Nếu JavaScript chạy được thì đoạn script bên dưới sẽ đổi thành "enabled". -->
+<h2 id="jsStatus" style="color:#b00020">You have JavaScript disabled</h2>
+
+<script type="text/javascript">
+  document.getElementById("jsStatus").innerHTML = "You have JavaScript enabled";
+  document.getElementById("jsStatus").style.color = "#1b7f3b";
+</script>
+
+<noscript>
+  <p>Trình duyệt đang tắt JavaScript, nên dòng chữ ở trên không được đổi.</p>
+</noscript>
+
+<p>Trang mẫu của giáo trình (có thể không còn truy cập được):
+   <a href="http://examples.funwebdev.com/JavaScriptTest.php" target="_blank" rel="noopener">examples.funwebdev.com/JavaScriptTest.php</a></p>
+<footer>
+  <p><em>Copyright &copy; 2015</em></p>
+</footer>
+
+<a class="back" href="../">&larr; Lab 08</a>
+</body>
+</html>
