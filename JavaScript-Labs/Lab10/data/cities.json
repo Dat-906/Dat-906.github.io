@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Calgary",
+    "country": "Canada",
+    "population": 1239220
+  },
+  {
+    "id": 2,
+    "name": "Banff",
+    "country": "Canada",
+    "population": 7851
+  },
+  {
+    "id": 3,
+    "name": "Florence",
+    "country": "Italy",
+    "population": 382258
+  },
+  {
+    "id": 4,
+    "name": "Rome",
+    "country": "Italy",
+    "population": 2873000
+  },
+  {
+    "id": 5,
+    "name": "Athens",
+    "country": "Greece",
+    "population": 664046
+  },
+  {
+    "id": 6,
+    "name": "Madrid",
+    "country": "Spain",
+    "population": 3223334
+  },
+  {
+    "id": 7,
+    "name": "Berlin",
+    "country": "Germany",
+    "population": 3644826
+  },
+  {
+    "id": 8,
+    "name": "Budapest",
+    "country": "Hungary",
+    "population": 1752286
+  },
+  {
+    "id": 9,
+    "name": "Lunenburg",
+    "country": "Canada",
+    "population": 2263
+  },
+  {
+    "id": 10,
+    "name": "Battle",
+    "country": "United Kingdom",
+    "population": 6673
+  },
+  {
+    "id": 11,
+    "name": "Nassau",
+    "country": "Bahamas",
+    "population": 274400
+  },
+  {
+    "id": 12,
+    "name": "Accra",
+    "country": "Ghana",
+    "population": 2291352
+  }
+]
