@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buổi 5 – Responsive Web &amp; JavaScript Console | Dương Thành Đạt</title>
+  <meta name="description" content="Tổng hợp nội dung Buổi 5 môn Phát triển ứng dụng TMĐT: responsive web với media query, thẻ picture và thực hành JavaScript trên Console.">
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --text: #1d2330;
+      --muted: #5b6475;
+      --line: #e1e5ec;
+      --accent: #1f5fbf;
+      --accent-soft: #e8f0fc;
+      --code-bg: #0f1623;
+      --code-text: #e6edf7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #11151d;
+        --surface: #1a202c;
+        --text: #e8ecf3;
+        --muted: #a3adbf;
+        --line: #2b3446;
+        --accent: #7fb0ff;
+        --accent-soft: #1d2a43;
+        --code-bg: #0a0f19;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+    header.top {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 40px 0 32px;
+    }
+    .eyebrow { margin: 0 0 8px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+    h1 { margin: 0 0 12px; font-size: clamp(1.6rem, 4.5vw, 2.3rem); line-height: 1.25; }
+    .lead { margin: 0; color: var(--muted); max-width: 62ch; }
+    .meta { margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .92rem; color: var(--muted); }
+    .meta strong { color: var(--text); font-weight: 600; }
+    nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    nav.toc a {
+      padding: 6px 14px; border-radius: 999px; font-size: .9rem;
+      background: var(--accent-soft); color: var(--accent); text-decoration: none;
+    }
+    nav.toc a:hover, nav.toc a:focus-visible { outline: 2px solid var(--accent); }
+    main section { padding: 36px 0 8px; }
+    h2 { margin: 0 0 6px; font-size: 1.45rem; }
+    h3 { margin: 28px 0 8px; font-size: 1.08rem; }
+    p { margin: 0 0 14px; }
+    .sub { color: var(--muted); margin-bottom: 18px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+      padding: 20px; margin: 0 0 16px;
+    }
+    .task {
+      display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+    }
+    .task p { margin: 0; }
+    .btn {
+      display: inline-block; padding: 10px 18px; border-radius: 8px; font-weight: 600;
+      background: var(--accent); color: #fff; text-decoration: none; white-space: nowrap;
+    }
+    @media (prefers-color-scheme: dark) { .btn { color: #0c1424; } }
+    .btn:hover, .btn:focus-visible { filter: brightness(1.1); outline: 2px solid var(--accent); outline-offset: 2px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-weight: 600; color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .03em; }
+    code { font: .9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--accent-soft); padding: 1px 6px; border-radius: 4px; }
+    pre {
+      margin: 0 0 16px; padding: 16px; overflow-x: auto; border-radius: 10px;
+      background: var(--code-bg); color: var(--code-text);
+      font: .88rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 8px; }
+    figure { margin: 0; }
+    figure img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 8px; }
+    figcaption { margin-top: 8px; font-size: .9rem; color: var(--muted); }
+    ul.plain { margin: 0 0 14px; padding-left: 20px; }
+    ul.plain li { margin-bottom: 6px; }
+    footer { margin-top: 40px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+    footer a { color: var(--accent); }
+    @media (max-width: 480px) {
+      header.top { padding: 28px 0 24px; }
+      .card { padding: 16px; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="wrap">
+      <p class="eyebrow">Phát triển ứng dụng TMĐT · Buổi 5</p>
+      <h1>Responsive Web và thực hành JavaScript trên Console</h1>
+      <p class="lead">Tổng hợp nội dung học trong buổi: thiết kế giao diện thích ứng nhiều kích thước màn hình bằng media query và thẻ <code>&lt;picture&gt;</code>, sau đó vận dụng JavaScript trực tiếp trên Console của trình duyệt.</p>
+      <div class="meta">
+        <span><strong>Sinh viên:</strong> Dương Thành Đạt</span>
+        <span><strong>MSSV:</strong> 31241025906</span>
+        <span><strong>GV:</strong> TS Nguyễn Mạnh Tuấn</span>
+      </div>
+      <nav class="toc" aria-label="Mục lục">
+        <a href="#noi-dung">Nội dung buổi học</a>
+        <a href="#bai1">Bài 1</a>
+        <a href="#bai2">Bài 2</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="noi-dung">
+      <h2>Nội dung học hôm nay</h2>
+      <p class="sub">Hai mảng kiến thức chính của buổi 5.</p>
+
+      <div class="card">
+        <h3 style="margin-top:0">1. Responsive web design</h3>
+        <p>Responsive web design là cách xây dựng một trang web duy nhất nhưng tự điều chỉnh bố cục theo kích thước và loại thiết bị hiển thị. Các kỹ thuật được học:</p>
+        <ul class="plain">
+          <li><strong>Thẻ meta viewport</strong> (<code>width=device-width, initial-scale=1.0</code>): yêu cầu trình duyệt trên điện thoại dùng đúng chiều rộng thiết bị thay vì thu nhỏ cả trang.</li>
+          <li><strong>Media query</strong> (<code>@media</code>): áp dụng CSS có điều kiện theo chiều rộng màn hình (<code>max-width</code>, <code>min-width</code>) hoặc theo loại thiết bị xuất (<code>print</code>).</li>
+          <li><strong>Bố cục phần trăm</strong>: dùng <code>float</code> và chiều rộng theo %, rồi chuyển các khối về 100% khi màn hình hẹp để xếp chồng theo chiều dọc.</li>
+          <li><strong>Ảnh thích ứng</strong> với <code>&lt;picture&gt;</code> và <code>&lt;source media="…"&gt;</code>: tải ảnh khác nhau tùy chiều rộng khung nhìn, có <code>&lt;img&gt;</code> làm phương án mặc định.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0">2. JavaScript trên Console của trình duyệt</h3>
+        <p>Vận dụng JavaScript vào một đối tượng đang chạy thật là trò chơi khủng long của Chrome (<code>chrome://dino</code>): truy cập đối tượng <code>Runner</code> qua Console, ghi đè phương thức và thay đổi các thông số cấu hình (tốc độ, lực nhảy). Nội dung này củng cố kiến thức về đối tượng, hàm, <code>this</code> và công cụ gỡ lỗi đã học ở Buổi 4.</p>
+      </div>
+    </section>
+
+    <section id="bai1">
+      <h2>Bài 1 – Thay đổi code khủng long Chrome</h2>
+      <p class="sub">Mở <code>chrome://dino</code>, nhấn <code>F12</code>, chọn tab Console rồi dán các đoạn mã bên dưới theo thứ tự.</p>
+
+      <h3>1.1 Làm khủng long bất tử</h3>
+      <p>Ghi đè phương thức <code>gameOver</code> của đối tượng <code>Runner</code> bằng hàm rỗng, trò chơi không còn kết thúc khi va chạm.</p>
+      <pre><code>const runner = Runner.getInstance();
+if (!window._gameOverGoc) window._gameOverGoc = runner.gameOver; // lưu bản gốc
+runner.gameOver = function () {};</code></pre>
+
+      <h3>1.2 Thay đổi tốc độ</h3>
+      <p>Đặt cả tốc độ khởi đầu và tốc độ tối đa để giá trị không bị đặt lại khi chơi lại.</p>
+      <pre><code>window.spd = (v) =&gt; {
+  const r = Runner.getInstance();
+  r.config.SPEED = v;
+  r.config.MAX_SPEED = v;
+  r.setSpeed(v);
+  console.log("Tốc độ =", v);
+};
+spd(13);   // đổi tốc độ bất kỳ lúc nào</code></pre>
+
+      <h3>1.3 Thay đổi độ cao nhảy</h3>
+      <pre><code>window.jmp = (v) =&gt; {
+  Runner.getInstance().tRex.setJumpVelocity(v);
+  console.log("Độ cao nhảy =", v);
+};
+jmp(15);   // mặc định là 10</code></pre>
+
+      <div class="shots">
+        <figure>
+          <img src="images/dino-toc-do.png" alt="Console chrome://dino sau khi gọi spd(100), trò chơi chạy rất nhanh" loading="lazy">
+          <figcaption>Gọi <code>spd(100)</code>: tốc độ cuộn tăng mạnh.</figcaption>
+        </figure>
+        <figure>
+          <img src="images/dino-do-cao.png" alt="Console chrome://dino sau khi gọi jmp(100)" loading="lazy">
+          <figcaption>Gọi <code>jmp(100)</code>: lực nhảy được nâng lên.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="bai2">
+      <h2>Bài 2 – Layout responsive hai khối</h2>
+      <p class="sub">Làm tuần tự trong cùng một file: 2.1 tạo hai khối theo bài giảng, 2.2 thêm logo UEH, CTD, BIT.</p>
+
+      <div class="card task">
+        <p><strong>Bài 2.1 và 2.2 – Hai khối responsive có logo</strong><br>Hai khối LEFT (70%) và RIGHT (30%) thay đổi theo chiều rộng màn hình; khối LEFT chứa logo thích ứng bằng thẻ <code>&lt;picture&gt;</code>.</p>
+        <a class="btn" href="Bai1.html">Mở bài làm →</a>
+      </div>
+
+      <h3>2.1 Tạo hai khối responsive</h3>
+      <p>Lấy mã tạo hai khối từ bài giảng (LEFT nền xanh, RIGHT nền đỏ, <code>float</code> và chiều rộng theo %), kèm thẻ meta viewport và các media query.</p>
+      <div class="card table-scroll">
+        <table>
+          <thead>
+            <tr><th>Điều kiện</th><th>Kết quả hiển thị</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chiều rộng &gt; 768px</td><td>LEFT chiếm 70%, RIGHT chiếm 30%, nằm cạnh nhau.</td></tr>
+            <tr><td><code>max-width: 768px</code></td><td>Cả hai khối rộng 100%, xếp chồng theo chiều dọc.</td></tr>
+            <tr><td>Từ 321px đến 479px</td><td>Ẩn cả LEFT và RIGHT.</td></tr>
+            <tr><td><code>@media print</code> (chế độ in)</td><td>Ẩn LEFT, RIGHT rộng 100%.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2.2 Thêm logo UEH, CTD, BIT</h3>
+      <p>Trong khối LEFT, thẻ <code>&lt;picture&gt;</code> chọn logo theo chiều rộng khung nhìn: từ 800px trở lên dùng logo UEH, từ 600px dùng logo CTD, còn lại dùng logo BIT ở thẻ <code>&lt;img&gt;</code>.</p>
+      <p>Cách kiểm tra: mở trang, nhấn <code>F12</code>, bật chế độ thiết bị (<code>Ctrl + Shift + M</code>) rồi kéo thay đổi chiều rộng; dùng <code>Ctrl + P</code> để xem bản in.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Bài tập cá nhân môn Phát triển ứng dụng TMĐT – UEH. Mã nguồn tại <a href="https://github.com/Dat-906/Dat-906.github.io">github.com/Dat-906/Dat-906.github.io</a>.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
